@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+fail() {
+  echo -e "\e[31mFail:\e[m $*"
+  exit 1
+}
+
+install_version() {
+  local install_type=$1
+  local version=$2
+  local install_path=$3  
+
+  mkdir -p "$install_path"
+  local tarball_url="https://github.com/microsoft/vscode-js-debug/releases/download/v${version}/vscode-js-debug-v${version}.tar.gz"
+
+  echo "Downloading vscode-js-debug ${version} from ${tarball_url}"
+  curl --silent -L "$tarball_url" -o /tmp/vscode-js-debug.tar.gz || fail "Could not download"
+
+  echo "Installing..."
+  tar -xzf /tmp/vscode-js-debug.tar.gz -C "$install_path" || fail "Could not decompress"
+  rm /tmp/vscode-js-debug.tar.gz
+  
+  echo "vscode-js-debug ${version} installed at ${install_path}"
+}
+
+
+install_version "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
