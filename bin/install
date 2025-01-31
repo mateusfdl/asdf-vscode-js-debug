@@ -13,7 +13,7 @@ install_version() {
   local install_path=$3  
 
   mkdir -p "$install_path"
-  local tarball_url="https://github.com/microsoft/vscode-js-debug/releases/download/v${version}/vscode-js-debug-v${version}.tar.gz"
+  local tarball_url="https://github.com/microsoft/vscode-js-debug/releases/download/v${version}/js-debug-dap-v${version}.tar.gz"
 
   echo "Downloading vscode-js-debug ${version} from ${tarball_url}"
   curl --silent -L "$tarball_url" -o /tmp/vscode-js-debug.tar.gz || fail "Could not download"
@@ -25,5 +25,4 @@ install_version() {
   echo "vscode-js-debug ${version} installed at ${install_path}"
 }
 
-
-install_version "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
+ install_version "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH" j
